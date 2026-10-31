@@ -1,0 +1,134 @@
+/* Inkwell: extra styling on top of the theme in .streamlit/config.toml.
+   Colours: paper #FAF7F2, ink #1D2433, ink-blue #2E5A9C, gold #E2B456. */
+
+:root {
+  --ink: #1D2433;
+  --ink-soft: #5B6273;
+  --ink-blue: #2E5A9C;
+  --ink-blue-soft: #E7EEF8;
+  --paper: #FAF7F2;
+  --card: #FFFFFF;
+  --line: #E4DCCD;
+  --gold: #C9973B;
+  --serif: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif;
+}
+
+/* Page width and a little breathing room at the top */
+.block-container { max-width: 920px; padding-top: 2.2rem; padding-bottom: 6rem; }
+header[data-testid="stHeader"] { background: transparent; }
+
+/* ---------- Hero ---------- */
+.ink-hero {
+  display: flex; gap: 1.1rem; align-items: center;
+  padding: 1.4rem 1.6rem; margin-bottom: 1rem;
+  background:
+    radial-gradient(circle at 92% 10%, rgba(46, 90, 156, 0.10), transparent 45%),
+    linear-gradient(180deg, #FFFFFF 0%, #FBF8F3 100%);
+  border: 1px solid var(--line); border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(29, 36, 51, 0.04), 0 8px 24px rgba(29, 36, 51, 0.05);
+}
+.ink-hero svg { flex: 0 0 auto; }
+.ink-hero h1 {
+  font-family: var(--serif); font-size: 2.3rem; line-height: 1.1;
+  margin: 0; padding: 0; color: var(--ink); letter-spacing: -0.01em;
+}
+.ink-hero h1 em { color: var(--ink-blue); font-style: italic; }
+.ink-tagline { color: var(--ink-soft); margin: 0.25rem 0 0.6rem; font-size: 0.98rem; }
+.ink-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ink-pill {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.18rem 0.65rem; border-radius: 999px;
+  background: var(--card); border: 1px solid var(--line);
+  font-size: 0.78rem; color: var(--ink-soft); white-space: nowrap;
+}
+.ink-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.ink-dot.ok { background: #2E9E6B; box-shadow: 0 0 0 3px rgba(46, 158, 107, 0.15); }
+.ink-dot.warm { background: #E2A23B; box-shadow: 0 0 0 3px rgba(226, 162, 59, 0.18); animation: ink-pulse 1.2s infinite; }
+.ink-dot.bad { background: #D2483F; box-shadow: 0 0 0 3px rgba(210, 72, 63, 0.15); }
+@keyframes ink-pulse { 50% { opacity: 0.35; } }
+
+/* ---------- Library stats ---------- */
+.ink-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin: 0.2rem 0 1rem; }
+.ink-stat {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 0.7rem 0.9rem;
+}
+.ink-stat b { display: block; font-family: var(--serif); font-size: 1.6rem; color: var(--ink); line-height: 1.1; }
+.ink-stat span { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* ---------- Empty states ---------- */
+.ink-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+  padding: 1.2rem 1.4rem; margin: 0.4rem 0 1rem;
+}
+.ink-card h3 { font-family: var(--serif); margin: 0 0 0.5rem; font-size: 1.25rem; color: var(--ink); }
+.ink-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+.ink-step { font-size: 0.88rem; color: var(--ink-soft); }
+.ink-step b {
+  display: inline-flex; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  align-items: center; justify-content: center; margin-bottom: 0.35rem;
+  background: var(--ink-blue-soft); color: var(--ink-blue); font-family: var(--serif);
+}
+.ink-label {
+  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-soft); margin: 0.6rem 0 0.3rem;
+}
+
+/* ---------- Chat ---------- */
+[data-testid="stChatMessage"] {
+  background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+  padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  box-shadow: 0 1px 2px rgba(29, 36, 51, 0.03);
+}
+/* The user's own messages sit on a darker "paper" tone */
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+  background: #F1ECE2; border-color: #E6DDCC;
+}
+
+/* Citation chips inside answers */
+.cite {
+  display: inline-block; margin: 0 0.15rem; padding: 0.02rem 0.5rem;
+  border-radius: 999px; background: var(--ink-blue-soft); border: 1px solid #CAD8EE;
+  color: var(--ink-blue); font-size: 0.74rem; font-weight: 600; white-space: nowrap;
+  vertical-align: 0.08em;
+}
+
+/* Timing chips under an answer */
+.ink-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+.ink-meta span {
+  font-size: 0.75rem; color: var(--ink-soft); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.1rem 0.6rem;
+}
+
+/* Score chips inside a source */
+.ink-scores { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.6rem; }
+.ink-scores span {
+  font-size: 0.72rem; color: var(--ink-soft); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 8px; padding: 0.08rem 0.5rem;
+}
+.ink-scores span b { color: var(--ink); }
+
+/* Source expanders */
+[data-testid="stExpander"] details { border-radius: 14px; background: var(--card); }
+
+/* Chat input */
+[data-testid="stChatInput"] > div { border-radius: 16px; box-shadow: 0 6px 24px rgba(29, 36, 51, 0.08); }
+
+/* ---------- Sidebar ---------- */
+.side-brand {
+  display: flex; align-items: center; gap: 0.55rem; margin: -0.6rem 0 0.8rem;
+  font-family: var(--serif); font-size: 1.5rem; color: #F4EFE4;
+}
+.side-brand small { display: block; font-family: inherit; font-size: 0.72rem; color: #A9B1C6; letter-spacing: 0.06em; }
+.side-label {
+  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #A9B1C6; margin: 1.1rem 0 0.35rem;
+}
+.side-doc { font-size: 0.86rem; line-height: 1.25; color: #F4EFE4; word-break: break-word; }
+.side-doc small { color: #A9B1C6; }
+
+@media (max-width: 640px) {
+  .ink-stats { grid-template-columns: repeat(2, 1fr); }
+  .ink-steps { grid-template-columns: 1fr; }
+  .ink-hero h1 { font-size: 1.8rem; }
+}

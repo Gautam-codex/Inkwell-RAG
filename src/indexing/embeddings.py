@@ -9,6 +9,7 @@ package, and this also lets us add BGE's recommended query instruction.
 """
 
 import os
+import threading
 from functools import lru_cache
 from typing import Optional
 
@@ -60,10 +61,21 @@ class SentenceTransformerEmbeddings(Embeddings):
         return self.embed_documents([self.query_instruction + text])[0]
 
 
+_load_lock = threading.Lock()  # the app loads models in a background thread
+
+
 @lru_cache(maxsize=2)
-def _load_local(model_name: str) -> SentenceTransformerEmbeddings:
-    """Load each local model only once per process (loading takes several seconds)."""
+def _load_local_cached(model_name: str) -> SentenceTransformerEmbeddings:
     return SentenceTransformerEmbeddings(model_name)
+
+
+def _load_local(model_name: str) -> SentenceTransformerEmbeddings:
+    """Load each local model only once per process (loading takes several seconds).
+
+    The lock makes a second caller wait for the first load instead of loading it twice.
+    """
+    with _load_lock:
+        return _load_local_cached(model_name)
 
 
 def get_embeddings(settings: Optional[Settings] = None) -> Embeddings:

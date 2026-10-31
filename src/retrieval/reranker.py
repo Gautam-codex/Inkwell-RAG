@@ -15,6 +15,7 @@ through a sigmoid, so the score we get is between 0 (irrelevant) and 1 (relevant
 """
 
 import os
+import threading
 from typing import Optional
 
 from src.config import Settings, get_settings
@@ -56,14 +57,22 @@ class Reranker:
         self.settings = settings or get_settings()
         self.model_name: Optional[str] = None
         self._model = None
+        self._lock = threading.Lock()  # the app may load it in a background thread
+
+    @property
+    def is_loaded(self) -> bool:
+        return self._model is not None
 
     def load(self) -> None:
         """Load the model now (otherwise it loads on the first query)."""
         self._ensure_loaded()
 
     def _ensure_loaded(self) -> None:
-        if self._model is not None:
-            return
+        with self._lock:
+            if self._model is None:
+                self._load()
+
+    def _load(self) -> None:
         primary, fallback = self.settings.reranker_model, self.settings.reranker_fallback_model
         if _total_ram_gb() < LOW_RAM_GB and primary != fallback:
             logger.info("Only %.1f GB RAM: using the smaller re-ranker %s", _total_ram_gb(), fallback)

@@ -5,3 +5,33 @@ gatherUsageStats = false
 [server]
 # Max upload size per file, in MB.
 maxUploadSize = 200
+
+[client]
+# Hide the developer menu and "Deploy" button.
+toolbarMode = "minimal"
+
+# "Inkwell" theme: warm paper background, deep-ink sidebar, ink-blue accents.
+# Fonts are ones already installed on Windows/macOS/Linux, so nothing is downloaded.
+[theme]
+base = "light"
+primaryColor = "#2E5A9C"
+backgroundColor = "#FAF7F2"
+secondaryBackgroundColor = "#F1ECE2"
+textColor = "#1D2433"
+linkColor = "#2E5A9C"
+borderColor = "#E4DCCD"
+showWidgetBorder = true
+baseRadius = "0.7rem"
+buttonRadius = "999px"
+font = "'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', sans-serif"
+headingFont = "'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif"
+headingFontWeights = [700, 600, 600, 600, 600, 600]
+codeFont = "Consolas, 'Cascadia Mono', Menlo, monospace"
+
+[theme.sidebar]
+backgroundColor = "#141D33"
+secondaryBackgroundColor = "#1F2B47"
+textColor = "#E8E3D6"
+primaryColor = "#E2B456"
+borderColor = "#2B3A5C"
+linkColor = "#E2B456"

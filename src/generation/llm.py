@@ -21,6 +21,15 @@ logger = get_logger(__name__)
 VISION_KEEP_ALIVE = "30s"
 
 
+def ollama_url(settings: Settings) -> str:
+    """Ollama's address, with "localhost" replaced by 127.0.0.1.
+
+    On Windows, "localhost" is tried as IPv6 first; Ollama only listens on IPv4, so each
+    request waited about 2 seconds before falling back (measured: 2071 ms vs 41 ms).
+    """
+    return settings.ollama_base_url.replace("://localhost", "://127.0.0.1")
+
+
 def get_llm(settings: Optional[Settings] = None, temperature: float = 0.1) -> BaseChatModel:
     """Return the chat model for the selected provider.
 
@@ -32,8 +41,9 @@ def get_llm(settings: Optional[Settings] = None, temperature: float = 0.1) -> Ba
 
         return ChatOllama(
             model=settings.ollama_llm_model,
-            base_url=settings.ollama_base_url,
+            base_url=ollama_url(settings),
             temperature=temperature,
+            keep_alive=settings.ollama_keep_alive,  # stay in RAM between questions
             num_ctx=settings.ollama_num_ctx,  # Ollama's default can be too small for 5 sources
         )
 
@@ -55,7 +65,7 @@ def get_vision_llm(settings: Optional[Settings] = None, max_tokens: int = 350) -
 
         return ChatOllama(
             model=settings.ollama_vision_model,
-            base_url=settings.ollama_base_url,
+            base_url=ollama_url(settings),
             temperature=0.0,
             num_predict=max_tokens,
             keep_alive=VISION_KEEP_ALIVE,
@@ -75,7 +85,7 @@ def check_vision(settings: Optional[Settings] = None) -> Optional[str]:
     settings = settings or get_settings()
     if settings.provider == "openai":
         return settings.provider_problem()
-    running, pulled = list_ollama_models(settings.ollama_base_url)
+    running, pulled = list_ollama_models(ollama_url(settings))
     if not running:
         return f"Ollama is not running at {settings.ollama_base_url}."
     if not model_pulled(settings.ollama_vision_model, pulled):
@@ -94,8 +104,36 @@ def make_summarizer(settings: Optional[Settings] = None) -> Callable[[str], str]
 # ---------------------------------------------------------------------------
 
 
+def preload_ollama_model(settings: Optional[Settings] = None) -> bool:
+    """Load the chat model into Ollama's memory now, so the first question isn't slow.
+
+    A request with a model name and no prompt makes Ollama load the model and return.
+    """
+    settings = settings or get_settings()
+    if settings.provider != "ollama":
+        return False
+    # Same context size as get_llm(): if it differed, Ollama would reload the model on the
+    # first real question (20+ s on a CPU), which is exactly what preloading should avoid.
+    body = json.dumps({
+        "model": settings.ollama_llm_model,
+        "keep_alive": settings.ollama_keep_alive,
+        "options": {"num_ctx": settings.ollama_num_ctx},
+    }).encode()
+    request = urllib.request.Request(f"{ollama_url(settings)}/api/generate", data=body,
+                                     headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(request, timeout=120) as response:
+            response.read()
+        logger.info("Preloaded %s in Ollama", settings.ollama_llm_model)
+        return True
+    except Exception as exc:
+        logger.warning("Could not preload %s: %s", settings.ollama_llm_model, exc)
+        return False
+
+
 def list_ollama_models(base_url: str) -> tuple[bool, list[str]]:
     """Return (is_running, names_of_pulled_models) using Ollama's /api/tags endpoint."""
+    base_url = base_url.replace("://localhost", "://127.0.0.1")  # see ollama_url()
     try:
         with urllib.request.urlopen(f"{base_url}/api/tags", timeout=3) as response:
             data = json.load(response)
@@ -116,7 +154,7 @@ def check_llm(settings: Optional[Settings] = None) -> Optional[str]:
     settings = settings or get_settings()
     if settings.provider == "openai":
         return settings.provider_problem()
-    running, pulled = list_ollama_models(settings.ollama_base_url)
+    running, pulled = list_ollama_models(ollama_url(settings))
     if not running:
         return f"Ollama is not running at {settings.ollama_base_url}. Start the Ollama app (or run `ollama serve`)."
     if not model_pulled(settings.ollama_llm_model, pulled):

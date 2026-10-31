@@ -36,8 +36,12 @@ class Settings(BaseSettings):
     provider: Literal["ollama", "openai"] = "ollama"
 
     # Ollama (local)
-    ollama_base_url: str = "http://localhost:11434"
+    # 127.0.0.1, not "localhost": on Windows "localhost" tries IPv6 first and every
+    # request to Ollama then waits ~2 s before falling back to IPv4.
+    ollama_base_url: str = "http://127.0.0.1:11434"
     ollama_llm_model: str = "llama3.2"
+    # How long Ollama keeps the chat model in RAM after the last question (reloading takes ~5-10 s)
+    ollama_keep_alive: str = "30m"
     # Context window in tokens. 8192 fits 5 sources + a long table; use 4096 on an 8 GB laptop.
     ollama_num_ctx: int = Field(8192, ge=2048)
     ollama_vision_model: str = "llava"  # llama3.2-vision fails on recent Ollama
