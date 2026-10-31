@@ -1,0 +1,17 @@
+mode,setup,type,questions,hit_at_5,mrr
+dense,Dense only,text,13,1.0,0.923
+dense,Dense only,table,11,1.0,0.78
+dense,Dense only,figure,5,1.0,1.0
+dense,Dense only,ocr,2,1.0,1.0
+bm25,BM25 only,text,13,1.0,0.962
+bm25,BM25 only,table,11,1.0,0.955
+bm25,BM25 only,figure,5,1.0,0.9
+bm25,BM25 only,ocr,2,1.0,1.0
+hybrid,Hybrid (RRF),text,13,1.0,0.923
+hybrid,Hybrid (RRF),table,11,1.0,0.818
+hybrid,Hybrid (RRF),figure,5,1.0,1.0
+hybrid,Hybrid (RRF),ocr,2,1.0,1.0
+hybrid_rerank,Hybrid + re-ranker,text,13,1.0,1.0
+hybrid_rerank,Hybrid + re-ranker,table,11,1.0,0.765
+hybrid_rerank,Hybrid + re-ranker,figure,5,1.0,1.0
+hybrid_rerank,Hybrid + re-ranker,ocr,2,1.0,1.0

@@ -45,6 +45,16 @@ def setup_logging() -> logging.Logger:
     return root
 
 
+def set_console_level(level: str) -> None:
+    """Change how much is printed to the console (the log file keeps everything).
+
+    The chat CLI uses "WARNING" so INFO lines don't break up a streamed answer.
+    """
+    for handler in setup_logging().handlers:
+        if not isinstance(handler, RotatingFileHandler):
+            handler.setLevel(level.upper())
+
+
 def get_logger(name: str) -> logging.Logger:
     """Return a child logger, e.g. get_logger(__name__) -> 'rag.src.ingestion.chunker'."""
     setup_logging()

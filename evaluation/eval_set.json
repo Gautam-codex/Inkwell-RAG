@@ -1,0 +1,43 @@
+{
+  "description": "Evaluation set for the multimodal RAG system. Every question has one expected file and the page(s) that contain the answer. type = where the answer lives: text, table, figure or ocr (scanned page).",
+  "documents": [
+    "hydroflow_pump_manual.pdf",
+    "northwind_annual_report.pdf",
+    "grid_storage_whitepaper.pdf"
+  ],
+  "questions": [
+    {"id": "q01", "type": "text", "question": "At what pressure are the HydroFlow pumps tested at the factory?", "expected_answer": "At 24 bar, which is 1.5 times the maximum working pressure of 16 bar.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [1]},
+    {"id": "q02", "type": "text", "question": "How long is the warranty on HF series pumps?", "expected_answer": "24 months from commissioning or 30 months from delivery, whichever comes first.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [1]},
+    {"id": "q03", "type": "table", "question": "What is the maximum flow rate of the HF-200 pump?", "expected_answer": "25 m3/h.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [2]},
+    {"id": "q04", "type": "table", "question": "How much does the HF-300 weigh?", "expected_answer": "102 kg.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [2]},
+    {"id": "q05", "type": "table", "question": "What is the motor power of the HF-100?", "expected_answer": "2.2 kW.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [2]},
+    {"id": "q06", "type": "text", "question": "How much free space must be left around the pump for service?", "expected_answer": "At least 0.5 m on all sides.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [3]},
+    {"id": "q07", "type": "text", "question": "What is the maximum allowed shaft misalignment after installation?", "expected_answer": "0.05 mm.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [3]},
+    {"id": "q08", "type": "figure", "question": "What does the HF-200 performance curve show?", "expected_answer": "Head versus flow rate at 2900 rpm: the head falls from about 45 m at zero flow to about 21 m at 25 m3/h.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [4]},
+    {"id": "q09", "type": "figure", "question": "Where is the best efficiency point of the HF-200?", "expected_answer": "At 18 m3/h and 34 m head.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [4]},
+    {"id": "q10", "type": "table", "question": "How often should the motor bearings be lubricated?", "expected_answer": "Every 2,000 operating hours.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [5]},
+    {"id": "q11", "type": "table", "question": "When should the mechanical seal be replaced?", "expected_answer": "Every 16,000 hours or when it is leaking.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [5]},
+    {"id": "q12", "type": "ocr", "question": "What should I do if the pump does not deliver water?", "expected_answer": "Prime it: fill the pump casing and suction pipe with liquid.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [6]},
+    {"id": "q13", "type": "ocr", "question": "What can cause excessive vibration of the pump?", "expected_answer": "An impeller out of balance or cavitation.", "expected_file": "hydroflow_pump_manual.pdf", "expected_pages": [6]},
+
+    {"id": "q14", "type": "text", "question": "By how much did Northwind's revenue grow in 2024?", "expected_answer": "By 12%, to 482 million euros.", "expected_file": "northwind_annual_report.pdf", "expected_pages": [1, 2]},
+    {"id": "q15", "type": "text", "question": "What dividend does the Board propose for 2024?", "expected_answer": "1.20 euros per share, up from 1.05 euros.", "expected_file": "northwind_annual_report.pdf", "expected_pages": [1]},
+    {"id": "q16", "type": "text", "question": "Who is the CEO of Northwind Systems?", "expected_answer": "Maria Lindqvist.", "expected_file": "northwind_annual_report.pdf", "expected_pages": [1]},
+    {"id": "q17", "type": "table", "question": "What was Northwind's net income in 2024?", "expected_answer": "52 million euros.", "expected_file": "northwind_annual_report.pdf", "expected_pages": [2]},
+    {"id": "q18", "type": "table", "question": "What were the earnings per share in 2023?", "expected_answer": "2.05 euros.", "expected_file": "northwind_annual_report.pdf", "expected_pages": [2]},
+    {"id": "q19", "type": "figure", "question": "What does Figure 2 of the annual report show?", "expected_answer": "Revenue by business segment (Cloud, Hardware, Services) for 2023 and 2024 in EUR million.", "expected_file": "northwind_annual_report.pdf", "expected_pages": [3]},
+    {"id": "q20", "type": "figure", "question": "Which business segment had the highest revenue in 2024?", "expected_answer": "Cloud, with 232 million euros (48% of revenue).", "expected_file": "northwind_annual_report.pdf", "expected_pages": [3]},
+    {"id": "q21", "type": "table", "question": "How fast did revenue grow in Asia-Pacific?", "expected_answer": "17%.", "expected_file": "northwind_annual_report.pdf", "expected_pages": [4]},
+    {"id": "q22", "type": "table", "question": "What was Northwind's revenue in North America in 2024?", "expected_answer": "145 million euros.", "expected_file": "northwind_annual_report.pdf", "expected_pages": [4]},
+    {"id": "q23", "type": "text", "question": "What revenue does Northwind expect for 2025?", "expected_answer": "Between 520 and 540 million euros.", "expected_file": "northwind_annual_report.pdf", "expected_pages": [5]},
+    {"id": "q24", "type": "text", "question": "Where will Northwind build its new data centres?", "expected_answer": "In Frankfurt and Dublin.", "expected_file": "northwind_annual_report.pdf", "expected_pages": [5]},
+
+    {"id": "q25", "type": "text", "question": "Which battery chemistries does the whitepaper compare?", "expected_answer": "Lithium iron phosphate (LFP), nickel manganese cobalt (NMC) and sodium-ion.", "expected_file": "grid_storage_whitepaper.pdf", "expected_pages": [1]},
+    {"id": "q26", "type": "text", "question": "At what temperature were the battery cells cycled?", "expected_answer": "25 °C, in a climate chamber.", "expected_file": "grid_storage_whitepaper.pdf", "expected_pages": [2]},
+    {"id": "q27", "type": "text", "question": "How was end of life defined in the battery study?", "expected_answer": "When a cell retains 80% of its initial capacity.", "expected_file": "grid_storage_whitepaper.pdf", "expected_pages": [2]},
+    {"id": "q28", "type": "figure", "question": "What does the capacity retention chart show?", "expected_answer": "Capacity retained versus cycle number: after 3,000 cycles LFP keeps 92%, sodium-ion 86% and NMC 81%.", "expected_file": "grid_storage_whitepaper.pdf", "expected_pages": [1, 3]},
+    {"id": "q29", "type": "table", "question": "What is the energy density of NMC cells?", "expected_answer": "240 Wh/kg.", "expected_file": "grid_storage_whitepaper.pdf", "expected_pages": [4]},
+    {"id": "q30", "type": "table", "question": "Which battery chemistry has the lowest cell cost?", "expected_answer": "Sodium-ion, at 85 USD/kWh.", "expected_file": "grid_storage_whitepaper.pdf", "expected_pages": [4]},
+    {"id": "q31", "type": "text", "question": "What do the authors recommend for new 4-hour storage systems?", "expected_answer": "LFP, and to re-evaluate sodium-ion in 2027.", "expected_file": "grid_storage_whitepaper.pdf", "expected_pages": [5]}
+  ]
+}

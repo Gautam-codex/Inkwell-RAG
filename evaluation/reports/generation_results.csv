@@ -1,0 +1,80 @@
+id,type,question,expected_answer,expected,answer,cited,citation_correct,faithfulness,correctness,retrieval_ms,generation_ms
+q01,text,At what pressure are the HydroFlow pumps tested at the factory?,"At 24 bar, which is 1.5 times the maximum working pressure of 16 bar.",hydroflow_pump_manual.pdf p[1],"The HydroFlow pumps are tested at the factory at 1.5 times the maximum working pressure of 16 bar, that is at 24 bar [hydroflow_pump_manual.pdf, p. 1].",hydroflow_pump_manual.pdf p1,1,5,5,21596.4,26291.8
+q02,text,How long is the warranty on HF series pumps?,"24 months from commissioning or 30 months from delivery, whichever comes first.",hydroflow_pump_manual.pdf p[1],"The warranty period for HF series pumps is 24 months from the date of commissioning or 30 months from the date of delivery, whichever comes first [hydroflow_pump_manual.pdf, p. 1].",hydroflow_pump_manual.pdf p1,1,5,5,22729.4,33633.6
+q03,table,What is the maximum flow rate of the HF-200 pump?,25 m3/h.,hydroflow_pump_manual.pdf p[2],"Here is the answer:
+
+* The maximum flow rate of the HF-200 pump is 25 m3/h [hydroflow_pump_manual.pdf, p. 2].",hydroflow_pump_manual.pdf p2,1,5,5,24408.1,34774.7
+q04,table,How much does the HF-300 weigh?,102 kg.,hydroflow_pump_manual.pdf p[2],"The HF-300 weighs 102 kg [hydroflow_pump_manual.pdf, p. 2].",hydroflow_pump_manual.pdf p2,1,5,5,22639.0,29924.6
+q05,table,What is the motor power of the HF-100?,2.2 kW.,hydroflow_pump_manual.pdf p[2],"According to [hydroflow_pump_manual.pdf, p. 2], the motor power of the HF-100 is 2.2 kW.",hydroflow_pump_manual.pdf p2,1,5,5,22224.1,26700.6
+q06,text,How much free space must be left around the pump for service?,At least 0.5 m on all sides.,hydroflow_pump_manual.pdf p[3],"Here is the answer:
+
+* A free space of at least 0.5 m must be left on all sides of the pump for service access [hydroflow_pump_manual.pdf, p. 3].",hydroflow_pump_manual.pdf p3,1,5,5,21617.4,31620.6
+q07,text,What is the maximum allowed shaft misalignment after installation?,0.05 mm.,hydroflow_pump_manual.pdf p[3],"* The shaft misalignment must not exceed 0.05 mm [hydroflow_pump_manual.pdf, p. 3].",hydroflow_pump_manual.pdf p3,1,5,5,21688.9,17545.5
+q08,figure,What does the HF-200 performance curve show?,Head versus flow rate at 2900 rpm: the head falls from about 45 m at zero flow to about 21 m at 25 m3/h.,hydroflow_pump_manual.pdf p[4],"The HF-200 performance curve shows how the head of the HF-200 changes with the flow rate. 
+
+* The best efficiency point (BEP) of the HF-200 is at 18 m3/h and 34 m head [hydroflow_pump_manual.pdf, p. 4].
+* The data is for a long service life [hydroflow_pump_manual.pdf, p. 4].
+* The graph shows that as the flow rate increases, the head of the HF-200 decreases [hydroflow_pump_manual.pdf, p. 4].
+* The graph includes a note indicating that the data is for a long service life [hydroflow_pump_manual.pdf, p. 4].",hydroflow_pump_manual.pdf p4; hydroflow_pump_manual.pdf p4,1,2,3,22188.1,32037.0
+q09,figure,Where is the best efficiency point of the HF-200?,At 18 m3/h and 34 m head.,hydroflow_pump_manual.pdf p[4],"The best efficiency point of the HF-200 is at 18 m3/h and 34 m head [hydroflow_pump_manual.pdf, p. 4].",hydroflow_pump_manual.pdf p4,1,5,5,21405.5,17377.7
+q10,table,How often should the motor bearings be lubricated?,"Every 2,000 operating hours.",hydroflow_pump_manual.pdf p[5],"• The motor bearings should be lubricated every 2,000 operating hours [hydroflow_pump_manual.pdf, p. 5].",hydroflow_pump_manual.pdf p5,1,5,5,21860.9,18380.2
+q11,table,When should the mechanical seal be replaced?,"Every 16,000 hours or when it is leaking.",hydroflow_pump_manual.pdf p[5],"According to [hydroflow_pump_manual.pdf, p. 5], the mechanical seal should be replaced:
+
+* Every 16,000 hours or when leaking [hydroflow_pump_manual.pdf, p. 5].",hydroflow_pump_manual.pdf p5,1,5,5,22227.2,17501.7
+q12,ocr,What should I do if the pump does not deliver water?,Prime it: fill the pump casing and suction pipe with liquid.,hydroflow_pump_manual.pdf p[6],"According to [hydroflow_pump_manual.pdf, p. 6], if the pump does not deliver water, the cause is that the suction pipe and casing are not primed. The remedy is to fill the pump casing and suction pipe with liquid.",hydroflow_pump_manual.pdf p6,1,5,5,23268.5,26838.6
+q13,ocr,What can cause excessive vibration of the pump?,An impeller out of balance or cavitation.,hydroflow_pump_manual.pdf p[6],"Excessive vibration of the pump can be caused by two reasons:
+
+* Impeller out of balance [hydroflow_pump_manual.pdf, p. 6]
+* Cavitation [hydroflow_pump_manual.pdf, p. 6]",hydroflow_pump_manual.pdf p6,1,4,5,21935.8,19904.1
+q14,text,By how much did Northwind's revenue grow in 2024?,"By 12%, to 482 million euros.","northwind_annual_report.pdf p[1, 2]","Here is the answer:
+
+* Revenue grew by 12% to 482 million euros in 2024 [northwind_annual_report.pdf, p. 1].
+* Revenue in 2023 was 430 million euros [northwind_annual_report.pdf, p. 2].
+* The 12% growth can be calculated as: (482 - 430) / 430 = 0.12 or 12% [northwind_annual_report.pdf, p. 1].",northwind_annual_report.pdf p1; northwind_annual_report.pdf p2,1,5,5,22864.5,38354.2
+q15,text,What dividend does the Board propose for 2024?,"1.20 euros per share, up from 1.05 euros.",northwind_annual_report.pdf p[1],"The Board proposes a dividend of 1.20 euros per share for 2024, up from 1.05 euros for 2023 [northwind_annual_report.pdf, p. 1].",northwind_annual_report.pdf p1,1,5,5,15145.4,22891.8
+q16,text,Who is the CEO of Northwind Systems?,Maria Lindqvist.,northwind_annual_report.pdf p[1],"According to [northwind_annual_report.pdf, p. 1], the CEO of Northwind Systems is Maria Lindqvist.",northwind_annual_report.pdf p1,1,5,5,8939.6,11820.1
+q17,table,What was Northwind's net income in 2024?,52 million euros.,northwind_annual_report.pdf p[2],"Here is the answer:
+
+* Northwind's net income in 2024 was 52 million euros [northwind_annual_report.pdf, p. 2].",northwind_annual_report.pdf p2,1,5,5,9398.3,18597.4
+q18,table,What were the earnings per share in 2023?,2.05 euros.,northwind_annual_report.pdf p[2],"Here is the answer:
+
+* Earnings per share (EUR) in 2023: 2.05 [northwind_annual_report.pdf, p. 2]",northwind_annual_report.pdf p2,1,5,5,10850.1,25569.4
+q19,figure,What does Figure 2 of the annual report show?,"Revenue by business segment (Cloud, Hardware, Services) for 2023 and 2024 in EUR million.",northwind_annual_report.pdf p[3],"Figure 2 of the annual report shows a bar chart comparing revenue by segment for the years 2023 and 2024, with the segments represented by different colored bars [northwind_annual_report.pdf, p. 3]. The chart indicates that the ""Cloud"" segment has the highest revenue, with ""Hardware"" being the second highest [northwind_annual_report.pdf, p. 3].",northwind_annual_report.pdf p3; northwind_annual_report.pdf p3,1,4,5,23371.9,30267.5
+q20,figure,Which business segment had the highest revenue in 2024?,"Cloud, with 232 million euros (48% of revenue).",northwind_annual_report.pdf p[3],"Here is the answer:
+
+* The business segment with the highest revenue in 2024 was Cloud, with revenue of 232 million euros [northwind_annual_report.pdf, p. 3].",northwind_annual_report.pdf p3,1,5,5,22879.7,17347.9
+q21,table,How fast did revenue grow in Asia-Pacific?,17%.,northwind_annual_report.pdf p[4],"Here is the answer:
+
+The revenue in Asia-Pacific grew by 17% in 2024 compared to 2023 [northwind_annual_report.pdf, p. 4].",northwind_annual_report.pdf p4; northwind_annual_report.pdf p4,1,5,5,22835.5,25350.5
+q22,table,What was Northwind's revenue in North America in 2024?,145 million euros.,northwind_annual_report.pdf p[4],"Here is the answer:
+
+* Northwind's revenue in North America in 2024 was 145 million euros [northwind_annual_report.pdf, p. 4].",northwind_annual_report.pdf p4,1,5,5,21961.1,17979.0
+q23,text,What revenue does Northwind expect for 2025?,Between 520 and 540 million euros.,northwind_annual_report.pdf p[5],"Here is the answer:
+
+Northwind expects revenue between 520 and 540 million euros for 2025 [northwind_annual_report.pdf, p. 5].",northwind_annual_report.pdf p5,1,5,5,25689.6,22060.3
+q24,text,Where will Northwind build its new data centres?,In Frankfurt and Dublin.,northwind_annual_report.pdf p[5],"According to [northwind_annual_report.pdf, p. 5], Northwind plans to build two new data centres in Frankfurt and Dublin.
+
+No additional information is available in the provided sources.",northwind_annual_report.pdf p5,1,5,5,16012.1,11988.3
+q25,text,Which battery chemistries does the whitepaper compare?,"Lithium iron phosphate (LFP), nickel manganese cobalt (NMC) and sodium-ion.",grid_storage_whitepaper.pdf p[1],"The whitepaper compares three lithium and sodium battery chemistries for stationary storage: 
+* Lithium iron phosphate (LFP)
+* Nickel manganese cobalt (NMC)
+* Sodium-ion",,0,5,5,7571.1,18339.4
+q26,text,At what temperature were the battery cells cycled?,"25 °C, in a climate chamber.",grid_storage_whitepaper.pdf p[2],"The battery cells were cycled in a climate chamber held at 25 °C [grid_storage_whitepaper.pdf, p. 2].",grid_storage_whitepaper.pdf p2,1,5,5,9358.2,26287.2
+q27,text,How was end of life defined in the battery study?,When a cell retains 80% of its initial capacity.,grid_storage_whitepaper.pdf p[2],"End of life was defined as the point where a cell retains 80% of its initial capacity [grid_storage_whitepaper.pdf, p. 2].",grid_storage_whitepaper.pdf p2,1,5,5,9563.0,18522.0
+q28,figure,What does the capacity retention chart show?,"Capacity retained versus cycle number: after 3,000 cycles LFP keeps 92%, sodium-ion 86% and NMC 81%.","grid_storage_whitepaper.pdf p[1, 3]","Here is the answer based on the provided sources:
+
+The capacity retention chart shows that:
+* NMC cells degrade the fastest and are projected to reach the end-of-life threshold at about 3,200 cycles [grid_storage_whitepaper.pdf, p. 3].
+* LFP cells show the slowest and most linear capacity fade [grid_storage_whitepaper.pdf, p. 3].
+* The capacity retention of NMC cells decreases more rapidly than that of LFP and sodium-ion cells [grid_storage_whitepaper.pdf, p. 3].
+* The capacity retention of sodium-ion cells is between that of LFP and NMC [grid_storage_whitepaper.pdf, p. 3].
+* The capacity retention of NMC cells decreases from 100% at 0 cycles to 80% at around 3,200 cycles [grid_storage_whitepaper.pdf, p. 3].",grid_storage_whitepaper.pdf p3; grid_storage_whitepaper.pdf p3,1,2,4,6325.9,35982.7
+q29,table,What is the energy density of NMC cells?,240 Wh/kg.,grid_storage_whitepaper.pdf p[4],"Here is the answer:
+
+* The energy density of NMC cells is 240 Wh/kg [grid_storage_whitepaper.pdf, p. 4].",grid_storage_whitepaper.pdf p4; grid_storage_whitepaper.pdf p4,1,5,5,9022.0,21795.2
+q30,table,Which battery chemistry has the lowest cell cost?,"Sodium-ion, at 85 USD/kWh.",grid_storage_whitepaper.pdf p[4],"Here is the answer:
+
+* The cell cost for Sodium-ion is 85 USD/kWh [grid_storage_whitepaper.pdf, p. 4].
+* The cell cost for NMC is 120 USD/kWh [grid_storage_whitepaper.pdf, p. 4].
+* The cell cost for LFP is 95 USD/kWh [grid_storage_whitepaper.pdf, p. 4].",grid_storage_whitepaper.pdf p4; grid_storage_whitepaper.pdf p4,1,5,5,9217.5,21412.7
+q31,text,What do the authors recommend for new 4-hour storage systems?,"LFP, and to re-evaluate sodium-ion in 2027.",grid_storage_whitepaper.pdf p[5],"The authors recommend LFP (Lithium Iron Phosphate) for new 4-hour storage systems [grid_storage_whitepaper.pdf, p. 5].",grid_storage_whitepaper.pdf p5,1,4,5,9232.4,217017.8

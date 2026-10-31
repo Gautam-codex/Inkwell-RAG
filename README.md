@@ -23,7 +23,7 @@ pip install -r requirements.txt
 # 2. Ollama (local LLM + vision model)
 winget install Ollama.Ollama
 ollama pull llama3.2
-ollama pull llama3.2-vision
+ollama pull llava
 
 # 3. Tesseract OCR (for scanned pages)
 winget install UB-Mannheim.TesseractOCR
@@ -42,7 +42,7 @@ If `Activate.ps1` is blocked, run once:
 python3.11 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 curl -fsSL https://ollama.com/install.sh | sh
-ollama pull llama3.2 && ollama pull llama3.2-vision
+ollama pull llama3.2 && ollama pull llava
 sudo apt install tesseract-ocr
 cp .env.example .env
 ```

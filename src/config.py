@@ -38,7 +38,7 @@ class Settings(BaseSettings):
     # Ollama (local)
     ollama_base_url: str = "http://localhost:11434"
     ollama_llm_model: str = "llama3.2"
-    ollama_vision_model: str = "llama3.2-vision"
+    ollama_vision_model: str = "llava"  # llama3.2-vision fails on recent Ollama
 
     # OpenAI (cloud, optional)
     openai_api_key: Optional[SecretStr] = None  # SecretStr hides the key in logs/printing
@@ -70,6 +70,11 @@ class Settings(BaseSettings):
     ocr_min_text_chars: int = Field(50, ge=0)
     ocr_image_coverage: float = Field(0.6, gt=0, le=1)
     tesseract_cmd: Optional[str] = None
+    # Ask the LLM for a one-line summary of each table (falls back to the header if it fails)
+    llm_table_summaries: bool = True
+    # Describe figures with the vision model. Slow on CPU, so there is a per-document cap.
+    caption_figures: bool = True
+    max_figures_per_doc: int = Field(25, ge=0)
 
     # ---------- Conversation ----------
     memory_turns: int = Field(4, ge=0)
@@ -96,6 +101,13 @@ class Settings(BaseSettings):
     @property
     def images_dir(self) -> Path:
         return self.data_path / "extracted_images"
+
+    def data_file(self, relative_path: str) -> Path:
+        """Turn a path stored in chunk metadata (relative to the data folder) into a full path.
+
+        Paths are stored relative so the index keeps working if the project folder moves.
+        """
+        return self.data_path / relative_path
 
     @property
     def bm25_path(self) -> Path:

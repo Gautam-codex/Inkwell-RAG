@@ -1,0 +1,5 @@
+mode,setup,hit_at_5,recall_at_5,mrr,mean_latency_ms,p95_latency_ms
+dense,Dense only,1.0,0.968,0.89,430.3,1545.3
+bm25,BM25 only,1.0,1.0,0.952,1.7,0.6
+hybrid,Hybrid (RRF),1.0,0.984,0.903,396.3,1568.3
+hybrid_rerank,Hybrid + re-ranker,1.0,0.984,0.917,22327.3,23475.1
