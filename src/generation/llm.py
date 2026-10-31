@@ -15,9 +15,10 @@ from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
-# Context window for Ollama, in tokens. Ollama's default (2048-4096) can be too small
-# for 5 sources + a table + the instructions. 8192 uses roughly 1 GB extra RAM.
-OLLAMA_NUM_CTX = 8192
+# Ollama normally keeps a model in RAM for 5 minutes after its last use. The vision
+# model is only needed while indexing figures, so it is unloaded after 30 seconds:
+# otherwise the chat model and the vision model sit in memory together (about 8.5 GB).
+VISION_KEEP_ALIVE = "30s"
 
 
 def get_llm(settings: Optional[Settings] = None, temperature: float = 0.1) -> BaseChatModel:
@@ -33,7 +34,7 @@ def get_llm(settings: Optional[Settings] = None, temperature: float = 0.1) -> Ba
             model=settings.ollama_llm_model,
             base_url=settings.ollama_base_url,
             temperature=temperature,
-            num_ctx=OLLAMA_NUM_CTX,
+            num_ctx=settings.ollama_num_ctx,  # Ollama's default can be too small for 5 sources
         )
 
     from langchain_openai import ChatOpenAI
@@ -57,6 +58,7 @@ def get_vision_llm(settings: Optional[Settings] = None, max_tokens: int = 350) -
             base_url=settings.ollama_base_url,
             temperature=0.0,
             num_predict=max_tokens,
+            keep_alive=VISION_KEEP_ALIVE,
         )
 
     from langchain_openai import ChatOpenAI

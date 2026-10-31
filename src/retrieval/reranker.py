@@ -27,6 +27,15 @@ os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
 RERANK_BATCH_SIZE = 16
 # Chunks longer than this many tokens are cut off; 512 is the model's limit.
 MAX_LENGTH = 512
+# Below this much total RAM the smaller fallback re-ranker is used automatically
+# ("fall back to MiniLM if memory is tight"). bge-reranker-base needs about 1.1 GB.
+LOW_RAM_GB = 10
+
+
+def _total_ram_gb() -> float:
+    import psutil
+
+    return psutil.virtual_memory().total / 1e9
 
 
 def _load_cross_encoder(model_name: str):
@@ -56,6 +65,9 @@ class Reranker:
         if self._model is not None:
             return
         primary, fallback = self.settings.reranker_model, self.settings.reranker_fallback_model
+        if _total_ram_gb() < LOW_RAM_GB and primary != fallback:
+            logger.info("Only %.1f GB RAM: using the smaller re-ranker %s", _total_ram_gb(), fallback)
+            primary = fallback
         try:
             self._model = _load_cross_encoder(primary)
             self.model_name = primary

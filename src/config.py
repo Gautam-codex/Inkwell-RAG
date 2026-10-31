@@ -38,6 +38,8 @@ class Settings(BaseSettings):
     # Ollama (local)
     ollama_base_url: str = "http://localhost:11434"
     ollama_llm_model: str = "llama3.2"
+    # Context window in tokens. 8192 fits 5 sources + a long table; use 4096 on an 8 GB laptop.
+    ollama_num_ctx: int = Field(8192, ge=2048)
     ollama_vision_model: str = "llava"  # llama3.2-vision fails on recent Ollama
 
     # OpenAI (cloud, optional)

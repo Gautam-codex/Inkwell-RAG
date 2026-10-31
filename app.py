@@ -373,6 +373,10 @@ def main() -> None:
         st.error(f"Could not load the models: {exc}. The first run needs internet to download them.")
         st.stop()
 
+    # Documents added from the command line while the app runs: refresh the BM25 index.
+    if len(indexer.bm25) != indexer.vector_store.count():
+        indexer.rebuild_bm25()
+
     settings = sidebar_settings(base)
     doc_ids = sidebar_documents(indexer)
     st.sidebar.divider()

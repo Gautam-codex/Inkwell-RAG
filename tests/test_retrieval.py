@@ -110,3 +110,39 @@ def test_model_mismatch_is_reported(tmp_path, retriever):
     store = VectorStore(other, embeddings=FakeEmbeddings())
     with pytest.raises(RetrievalError, match="Rebuild"):
         HybridRetriever(store, retriever.bm25, reranker=WordOverlapReranker(), settings=other).retrieve("coolant")
+
+
+# ---------- Re-ranker model choice ----------
+
+
+def test_reranker_uses_small_model_on_low_ram(monkeypatch):
+    from src.retrieval import reranker as rr
+
+    loaded = []
+    monkeypatch.setattr(rr, "_load_cross_encoder", lambda name: loaded.append(name) or object())
+    settings = Settings(_env_file=None)
+
+    monkeypatch.setattr(rr, "_total_ram_gb", lambda: 8.0)
+    small = rr.Reranker(settings)
+    small.load()
+    assert small.model_name == settings.reranker_fallback_model
+
+    monkeypatch.setattr(rr, "_total_ram_gb", lambda: 16.0)
+    big = rr.Reranker(settings)
+    big.load()
+    assert big.model_name == settings.reranker_model
+
+
+def test_reranker_falls_back_when_loading_fails(monkeypatch):
+    from src.retrieval import reranker as rr
+
+    def fake_load(name):
+        if name == "BAAI/bge-reranker-base":
+            raise MemoryError("not enough RAM")
+        return object()
+
+    monkeypatch.setattr(rr, "_load_cross_encoder", fake_load)
+    monkeypatch.setattr(rr, "_total_ram_gb", lambda: 16.0)
+    r = rr.Reranker(Settings(_env_file=None))
+    r.load()
+    assert r.model_name == "cross-encoder/ms-marco-MiniLM-L-6-v2"
