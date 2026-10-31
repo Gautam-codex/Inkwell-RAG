@@ -134,6 +134,9 @@ def friendly_llm_error(exc: Exception) -> str:
         return "The selected model is not available. For Ollama run: ollama pull <model name>"
     if "401" in lowered or "api key" in lowered or "authentication" in lowered:
         return "The OpenAI API key was rejected. Check OPENAI_API_KEY."
+    if "no credits" in lowered or "insufficient_quota" in lowered or "exceeded your current quota" in lowered:
+        return ("Your OpenAI account has no credits left. Add credits at "
+                "https://platform.openai.com/settings/organization/billing, or switch the provider to Ollama.")
     if "429" in lowered or "rate limit" in lowered or "quota" in lowered:
         return "The OpenAI rate limit or quota was reached. Wait a moment or check your billing."
     return f"The language model failed: {exc}"

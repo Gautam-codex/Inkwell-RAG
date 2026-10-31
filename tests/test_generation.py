@@ -131,3 +131,12 @@ def test_llm_failure_gives_readable_error():
     chain = RAGChain(FakeRetriever(CHUNKS), settings=Settings(_env_file=None), llm=BrokenModel(responses=["x"]))
     with pytest.raises(GenerationError, match="Ollama"):
         chain.ask("Question?")
+
+
+def test_openai_errors_are_explained():
+    from src.generation.llm import friendly_llm_error
+
+    no_credit = Exception("Error code: 429 - You have no credits remaining. Add credits to continue")
+    assert "no credits left" in friendly_llm_error(no_credit)
+    assert "rate limit" in friendly_llm_error(Exception("Error code: 429 - Rate limit reached"))
+    assert "API key was rejected" in friendly_llm_error(Exception("Error code: 401 - Incorrect API key"))
