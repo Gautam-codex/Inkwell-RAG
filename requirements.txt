@@ -1,0 +1,41 @@
+# Python 3.11. Major versions are pinned so a fresh install behaves the same later.
+# On Windows, pip installs the CPU build of PyTorch (pulled in by sentence-transformers).
+
+# --- Config ---
+pydantic-settings>=2.6,<3
+
+# --- UI ---
+streamlit>=1.40,<2
+
+# --- Orchestration (LangChain) ---
+langchain-core>=1.0,<2
+langchain-community>=0.4,<0.5
+langchain-text-splitters>=1.0,<2   # RecursiveCharacterTextSplitter
+langchain-chroma>=1.0,<2
+langchain-ollama>=1.0,<2
+langchain-openai>=1.0,<2
+
+# --- Vector DB ---
+chromadb>=1.0,<2
+
+# --- Embeddings (BGE) and cross-encoder re-ranker ---
+sentence-transformers>=5.0,<7
+
+# --- Sparse search ---
+rank-bm25>=0.2.2,<0.3
+
+# --- PDF parsing, tables, OCR ---
+pymupdf>=1.26,<2
+pdfplumber>=0.11,<0.12
+pytesseract>=0.3.13,<0.4
+pillow>=11,<14
+
+# --- Evaluation ---
+matplotlib>=3.8,<4
+psutil>=6,<8
+
+# --- Testing ---
+pytest>=8,<10
+
+# --- Optional hi-res parser (large install, not needed for the default pipeline) ---
+# unstructured[pdf]>=0.16,<1

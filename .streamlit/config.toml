@@ -1,0 +1,7 @@
+[browser]
+# Keep the app fully offline: no usage statistics sent to Streamlit.
+gatherUsageStats = false
+
+[server]
+# Max upload size per file, in MB.
+maxUploadSize = 200
